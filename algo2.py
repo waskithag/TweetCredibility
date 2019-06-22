@@ -15,8 +15,8 @@ sum = []
 geom = []
 
 def featureRank(matrix):
-    temp = 0
     for i in range(len(matrix)):
+        temp = 0
         for j in range(6):
             temp += matrix.iloc[j, i]
         sum.append(temp)
