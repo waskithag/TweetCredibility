@@ -1,0 +1,2 @@
+jumfav	pjgkata	pjgchar	jumrt	jumpos	jumneg
+0,371848	0,241382	0,182809	0,102705	0,050628	0,050628
