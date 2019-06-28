@@ -12,22 +12,28 @@ from algo3 import *
 matrix = pd.read_excel("matrixpairwise.xlsx", index_col = 0)
 pv = pd.read_excel("pve.xlsx")
 pv = pv.values.T.tolist()
-data = pd.read_excel("coba.xlsx")
-label = data['label']
+data = pd.read_excel("coba2.xlsx")
+label = data['label'].tolist()
 data = data.values.tolist()
+probLabel = np.zeros(2)
+
+for i in range(len(label)):
+    if (label[i] == 'Kredibel'):
+        probLabel[0] += 1
+    else:
+        probLabel[1] += 1
+        
+probLabel = probLabel / np.sum(probLabel)
 
 default = "Tidak ada tweet"
-
-def classifyEngine(data, default):
-    if data is None:
-        print(default)
+                
+def classify(tweet):
+    classify = np.zeros(2)
+    feature = tweet[1:7]
+    probFeat = feature.prod() * pve
+    classify[0] = probFeat * probLabel[0]
+    classify[1] = probFeat * probLabel[1]
+    if classify[0] > classify[1]:
+        return "Kredibel"
     else:
-        for i in range(len(data)):
-            feature = []
-            for j in range(1, 6):
-                feature.append(data[i][j])
-            feature = np.array(feature)
-            pve = pv
-            probFi = feature.prod() * pv
-            
-            
+        return "Tidak Kredibel"
