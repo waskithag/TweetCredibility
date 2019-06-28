@@ -27,12 +27,17 @@ probLabel = probLabel / np.sum(probLabel)
 
 default = "Tidak ada tweet"
                 
-def classify(tweet):
+def klasifikasi(tweet):
     classify = np.zeros(2)
     feature = tweet[1:7]
-    probFeat = feature.prod() * pve
+    probFeat = np.array(feature) * pve
+    print(probFeat)
+    probFeat = np.array(probFeat).prod()
+    print(probFeat)
     classify[0] = probFeat * probLabel[0]
     classify[1] = probFeat * probLabel[1]
+    print(classify[0])
+    print(classify[1])
     if classify[0] > classify[1]:
         return "Kredibel"
     else:
